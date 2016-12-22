@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
+import { FirebaseKey } from './FirebaseKey'
 
 // Must export the config
 export const firebaseConfig = {
-  apiKey: "API_KEY",
+  apiKey: "FirebaseKey.API_Key",
   authDomain: "ng2listings.firebaseapp.com",
   databaseURL: "https://ng2listings.firebaseio.com",
   storageBucket: "ng2listings.appspot.com"
