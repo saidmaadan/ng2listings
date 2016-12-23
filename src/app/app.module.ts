@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
-import { FirebaseKey } from './FirebaseKey'
+import { FirebaseKey } from './FirebaseKey';
+import { NavbarComponent } from './navbar/navbar.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -18,7 +19,8 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
