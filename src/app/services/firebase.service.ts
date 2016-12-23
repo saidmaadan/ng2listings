@@ -13,9 +13,20 @@ export class FirebaseService{
 
   }
 
-  getListings(){
-    this.listings = this._angularFire.database.list('/listings') as 
-    FirebaseListObservable<Listing[]>
+  getListings(type:string = null){
+    if(type != null){
+      this.listings = this._angularFire.database.list('/listings', {
+        query: {
+          orderByChild: 'type',
+          equalTo: type
+        }
+      }) as 
+      FirebaseListObservable<Listing[]>
+
+    }else{
+      this.listings = this._angularFire.database.list('/listings') as 
+      FirebaseListObservable<Listing[]>
+    }
     return this.listings;
   }
 
@@ -23,5 +34,9 @@ export class FirebaseService{
     this.types = this._angularFire.database.list('/types') as 
     FirebaseListObservable<Type[]>
     return this.types;
+  }
+
+  addListing(newListing){
+    return this.listings.push(newListing);
   }
 }

@@ -40,4 +40,39 @@ export class AppComponent implements OnInit {
     }
     this.appState = state;
   }
+
+  searchType(type){
+    this._fbs.getListings(type).subscribe(types => {
+      this.types = types;
+    });
+  }
+
+  addListing(
+    title:string,
+    description:string,
+    address:string,
+    city:string,
+    type:string,
+    number_of_floors:string,
+    property_type:string,
+    price:string,
+    beds:string,
+    baths:string,
+    image:string){
+    var posted_at = new Date().toString();
+    var newListing = {
+      title: title,
+      description: description,
+      address: address,
+      city: city,
+      type: type,
+      number_of_floors: number_of_floors,
+      property_type: property_type,
+      price: price,
+      beds: beds,
+      baths: baths,
+      image: image,
+      posted_at: posted_at
+    }
+  }
 }

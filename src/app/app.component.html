@@ -1,6 +1,108 @@
 <app-navbar></app-navbar>
 <div class="container">
 
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="changeState('add')" class="btn btn-success">Add Listing</button>
+    </div>
+    <div class="col-md-6">
+      <label> Search Listing Type
+        <select (change)="searchType(searchedType.value)" #searchedType>
+          <option value='0'>Select</option>
+          <option *ngFor="let type of types" value="{{type.name}}">{{type.name}}</option>
+        </select>
+      </label>
+
+    </div>
+  </div>
+
+  <div *ngIf="appState == 'add'" class="row">
+    <div class="col-md-12">
+      <h3>Add Listing</h3>
+      <form (submit)="addListing(
+        title.value,
+        description.value,
+        address.value,
+        city.value,
+        type.value,
+        number_of_floors.value,
+        property_type.value,
+        price.value,
+        beds.value,
+        baths.value,
+        image.value
+      )">
+
+      <div class="row">
+        <div class="col-md-6">
+          <label>Title
+            <input type="text" placeholder="Property name" #title >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Property Type
+            <select #type>
+              <option value='0'>Select</option>
+              <option *ngFor="let type of types" value="{{type.name}}">{{type.name}}</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Description
+            <input type="text" placeholder="Description" #description >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Address
+            <input type="text" placeholder="Address" #address >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>City
+            <input type="text" placeholder="City" #city >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Floors
+            <input type="number" placeholder="Number of Floors" #number_of_floors >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Property 
+            <input type="text" placeholder="Property Type" #property_type >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Beds
+            <input type="number" placeholder="Beds" #beds >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Baths
+            <input type="number" placeholder="Baths" #baths >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Image URL
+            <input type="text" placeholder="Image" #image >
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label>Price
+            <input type="text" placeholder="Price" #price >
+          </label>
+        </div>
+        <div class='row'>
+          <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Submit">
+          </div>
+        </div>
+      </div>
+        
+      </form>
+    </div>
+  </div>
+
   <div *ngIf="appState == 'extend'">
     <div class="row">
       <div class="col-md-12">
@@ -12,7 +114,7 @@
     <div *ngFor="let listing of listings">
       <div *ngIf="listing.$key == activeKey">
         <div class="row">
-          <div class="col-md-5 col-md-offset-1">
+          <div class="col-md-6">
             <img src="{{listing.image}}" alt="..." class='img-responsive main_img'>
           </div>
           <div class="col-md-5 col-md-offset-1">
