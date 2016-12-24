@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { FirebaseService } from './services/firebase.service';
 import { Listing } from './Listing';
 import { Type } from './Type';
@@ -129,7 +128,7 @@ export class AppComponent implements OnInit {
   }
 
   deleteListing(key){
-    this._fbs.updateListing(key);
+    this._fbs.deleteListing(key);
 
     this.changeState('default');
 
