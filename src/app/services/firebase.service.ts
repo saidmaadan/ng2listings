@@ -39,4 +39,13 @@ export class FirebaseService{
   addListing(newListing){
     return this.listings.push(newListing);
   }
+
+  updateListing(key, editListing){
+    return this.listings.update(key, editListing);
+  }
+
+  deleteListing(key){
+    return this.listings.remove(key);
+  }
+
 }

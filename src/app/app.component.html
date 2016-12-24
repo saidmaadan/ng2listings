@@ -16,6 +16,8 @@
     </div>
   </div>
 
+
+  <!-- Add Listing form -->
   <div *ngIf="appState == 'add'" class="row">
     <div class="col-md-12">
       <h3>Add Listing</h3>
@@ -49,7 +51,7 @@
         </div>
         <div class="col-md-6">
           <label>Description
-            <input type="text" placeholder="Description" #description >
+            <textarea #description></textarea>
           </label>
         </div>
         <div class="col-md-6">
@@ -103,6 +105,82 @@
     </div>
   </div>
 
+
+  <!-- Update Listing form -->
+  <div *ngIf="appState == 'edit'" class="row">
+    <div class="col-md-12">
+      <h3>Update Listing</h3>
+      <form (submit)="updateListing()">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Title
+              <input type="text" [(ngModel)]="activeTitle" name="activeTitle" placeholder="Property name" #title >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Property Type
+              <select [(ngModel)]="activeType" name="activeType" #type>
+                <option value='0'>Select</option>
+                <option *ngFor="let type of types" value="{{type.name}}">{{type.name}}</option>
+              </select>
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Description
+              <textarea [(ngModel)]="activeDescription" name="activeDescription" #description></textarea>
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Address
+              <input type="text" [(ngModel)]="activeAddress" name="activeAddress" placeholder="Address" #address >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>City
+              <input type="text" [(ngModel)]="activeCity" name="activeCity" placeholder="City" #city >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Floors
+              <input type="number" [(ngModel)]="activeNumberOfFloors" name="activeNumberOfFloors" placeholder="Number of Floors" #number_of_floors >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Property 
+              <input type="text" [(ngModel)]="activeProperty" name="activeProperty" placeholder="Property Type" #property_type >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Beds
+              <input type="number" [(ngModel)]="activeBeds" name="activeBeds" placeholder="Beds" #beds >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Baths
+              <input type="number" [(ngModel)]="activeBaths" name="activeBaths" placeholder="Baths" #baths >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Image URL
+              <input type="text" [(ngModel)]="activeImage" name="activeImage" placeholder="Image" #image >
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>Price
+              <input type="text" [(ngModel)]="activePrice" name="activePrice" placeholder="Price" #price >
+            </label>
+          </div>
+          <div class='row'>
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-success" value="Submit">
+            </div>
+          </div>
+        </div>    
+      </form>
+    </div>
+  </div>
+
+
   <div *ngIf="appState == 'extend'">
     <div class="row">
       <div class="col-md-12">
@@ -142,10 +220,13 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price: {{listing.price}}</li>
-          <li class="list-group-item">
-            <span class="btn btn-primary" (click)="changeState('extend', listing.$key)">More</span> | <span>Update</span> | <span>Delete</span>
-          </li>
         </ul>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-default" (click)="changeState('extend', listing.$key)">More</button>
+          <button type="button" class="btn btn-default" (click)="showEdit(listing)">Update</button>
+          <button type="button" class="btn btn-default" (click)="deleteListing(listing.$key)">Delete</button>
+        </div>
+        
         <!-- <div class="card-block">
           <a href="#" class="card-link">Card link</a>
           <a href="#" class="card-link">Another link</a>
